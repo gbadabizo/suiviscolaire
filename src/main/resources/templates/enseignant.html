@@ -1,0 +1,168 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="content">
+<div class="container-fluid">
+  <p><a th:href="@{'/enseignant'}" class="btn btn-custon-four btn-primary"><i class="fa fa-plus"></i>Ajouter un enseignant</a></p>
+<div class="row">
+                        <div class="col-lg-10">
+                            <div class="sparkline8-list basic-res-b-30 shadow-reset">
+                                <div class="sparkline8-hd">
+                                    <div class="main-sparkline8-hd">
+                                        <h1>Enregistrer un enseignant</h1>
+                                        <div class="sparkline8-outline-icon">
+                                            <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                            <span><i class="fa fa-wrench"></i></span>
+                                            <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sparkline8-graph">
+                                    <div class="basic-login-form-ad">
+                                        
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="basic-login-inner">
+                                                    <form  th:action="@{/enseignant/add}" th:object="${enseignant}" method="post">
+                                                     <input type="hidden" class="form-control"  th:field="*{id_enseignant}"  th:value="${enseignant.id_enseignant}" />
+                                                    
+                                                    <div class="row">
+                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Nom</label>
+                                                            <input type="text" class="form-control"  th:field="*{nom}"  th:value="${enseignant.nom}" placeholder="nom ">
+                                                        </div>
+                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Prénoms</label>
+                                                             <input type="text" class="form-control"  th:field="*{prenoms}"  th:value="${enseignant.prenoms}" placeholder="prenoms ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Telephone(22891751012)</label>
+                                                            <input type="text" class="form-control"  th:field="*{telephone}"  th:value="${enseignant.telephone}" placeholder="telephone">
+                                                        </div>
+                                                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Email</label>
+                                                             <input type="email" class="form-control"  th:field="*{email}" th:value="${enseignant.email}"  placeholder="Email">
+                                                        </div>
+                                                    </div>
+                                                   
+                                                        <div class="login-btn-inner">
+                                                            <button type="submit" class="btn btn-custon-four btn-success" id="btnsave"><icon class="fa fa-save"></icon> Enregistrer</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                                            		<div class="">
+                                           				<img  th:src="@{/img/img1.jpg}" alt="image">
+                                    
+                                      				  </div>
+                                            </div>
+                    </div>
+                    <br/>
+                    <hr/>
+    <div class="row">
+    <div class="data-table-area mg-b-15">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sparkline13-list shadow-reset">
+                                <div class="sparkline13-hd">
+                                    <div class="main-sparkline13-hd">
+                                        <h1>Liste<span class="table-project-n"> des enseignants</span></h1>
+                                       
+                                    </div>
+                                </div>
+                                <div class="sparkline13-graph">
+                                    <div class="">
+                                        
+                                        <div class="">
+                                        <div>
+                                        <div class="fixed-table-header" style="display: none;">
+                                        <table>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-body">
+                                        <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>
+                                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table table-hover JColResizer">
+                                            <thead>
+                                            <tr>
+		                                            <th style="width: 3.2%;" data-field="id" tabindex="0">
+		                                            <div class="th-inner ">#</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 16.6%;" data-field="name" tabindex="0">
+		                                            <div class="th-inner ">Nom</div><div class="fht-cell"></div></th>
+		                                            <th style="width: 14.1%;" data-field="email" tabindex="0">
+		                                            <div class="th-inner ">Prenoms</div>
+		                                            <div class="fht-cell"></div></th>
+		                                            <th style="width: 12.7%;" data-field="phone" tabindex="0">
+		                                            <div class="th-inner ">Telephone</div><div class="fht-cell"></div></th>
+		                                            <th style="width: 11.6%;" data-field="company" tabindex="0">
+		                                            <div class="th-inner ">Email</div>
+		                                            <div class="fht-cell"></div></th>
+		                                                                                   
+		                                            <th style="width: 6.6%;" data-field="action" tabindex="0">
+		                                            <div class="th-inner ">Action</div><div class="fht-cell"></div></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-index="0"  th:each="e,iterationStatus : ${enseignants}"> 
+		                                             <td style="" th:text="${iterationStatus.count}">1</td> 
+		                                             <td style="">
+		                                          			   <span th:text="${e.nom}"> </span>
+		                                             </td>
+		                                              <td style="">
+				                                        <span th:text="${e.prenoms}">  </span>
+				                                          </td> 
+				                                          <td style="">
+				                                        			 <span th:text="${e.telephone}">  </span>
+				                                        </td>
+				                                         <td style="">
+				                                        			 <span th:text="${e.email}">  </span>
+				                                         </td>
+				                                          
+		                                                <td class="datatable-ct" style="">
+		                                               	<div class="button-style-four btn-mg-b-10">
+		                                               	 		<a th:href="@{'/enseignant/edit/' + ${e.id_enseignant}}" class="btn btn-custon-four btn-default"><i class="fa fa-list"></i>Matières</a>
+		                                               	 	 	<a th:href="@{'/enseignant/edit/' + ${e.id_enseignant}}" class="btn btn-custon-four btn-warning"><i class="fa fa-list"></i>Ecoles</a>
+				                                               	<a th:href="@{'/enseignant/edit/' + ${e.id_enseignant}}" class="btn btn-custon-four btn-info"><i class="fa fa-edit"></i>Modifier</a>
+									                             <a th:href="@{'/enseignant/delete/' + ${e.id_enseignant}}" class="btn btn-custon-four btn-danger"><i class="fa fa-trash"></i>Supprimer</a>
+                                  						  </div>
+		                                             		</td>
+                                               </tr>
+                                             </tbody>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-footer" style="display: none;">
+                                       			 <table><tbody><tr></tr></tbody></table>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+           </div> 
+</div>
+</body>
+
+</html>
