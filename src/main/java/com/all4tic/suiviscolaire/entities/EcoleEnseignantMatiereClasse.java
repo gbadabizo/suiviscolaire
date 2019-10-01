@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="ecoleens_matcl")
@@ -12,20 +15,25 @@ public class EcoleEnseignantMatiereClasse {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_ecolensmat ;
+	@ManyToOne()
 	private Matiere matiere;
+	@ManyToOne()
 	private Ecole ecole;
-	private Enseignant enseigant ;
+	@ManyToOne()
+	private Enseignant enseignant ;
+	@ManyToOne()
 	private Classe classe ;
+	@ManyToOne()
 	private  Annee annee;
 	private int statut=1;
 	
-	public EcoleEnseignantMatiereClasse(int id_ecolensmat, Matiere matiere, Ecole ecole, Enseignant enseigant,
+	public EcoleEnseignantMatiereClasse(int id_ecolensmat, Matiere matiere, Ecole ecole, Enseignant enseignant,
 			Classe classe) {
 		super();
 		this.id_ecolensmat = id_ecolensmat;
 		this.matiere = matiere;
 		this.ecole = ecole;
-		this.enseigant = enseigant;
+		this.enseignant = enseignant;
 		this.classe = classe;
 	}
 	public EcoleEnseignantMatiereClasse() {
@@ -50,11 +58,11 @@ public class EcoleEnseignantMatiereClasse {
 	public void setEcole(Ecole ecole) {
 		this.ecole = ecole;
 	}
-	public Enseignant getEnseigant() {
-		return enseigant;
+	public Enseignant getEnseignant() {
+		return enseignant;
 	}
-	public void setEnseigant(Enseignant enseigant) {
-		this.enseigant = enseigant;
+	public void setEnseignant(Enseignant enseignant) {
+		this.enseignant = enseignant;
 	}
 	public Classe getClasse() {
 		return classe;

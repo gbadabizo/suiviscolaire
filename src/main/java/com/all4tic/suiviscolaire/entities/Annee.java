@@ -1,11 +1,10 @@
 package com.all4tic.suiviscolaire.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -20,8 +19,22 @@ public class Annee implements Serializable{
 	private Date date_debut ;
 	@Temporal(TemporalType.DATE)
 	private Date date_fin ;
+	@OneToMany(mappedBy ="annee")
+	private Set<SuiviGeneral> suivis ;
+	@OneToMany(mappedBy ="annee")
+	private Set<SuiviEleve> suiviEleves ;
 
 	private int status =1 ;
+	@OneToMany(
+			mappedBy="annee",
+	        cascade = CascadeType.REMOVE
+	    )
+	List<EcoleEnseignantMatiereClasse> ecoleEnseignantMatiereClasses ;
+	@OneToMany(
+			mappedBy="annee",
+	        cascade = CascadeType.REMOVE
+	    )
+	List<EleveClasseAnnee> eleveClasseAnnees ;
 	public Annee() {
 		super();
 		
@@ -68,6 +81,30 @@ public class Annee implements Serializable{
 	}
 	public void setStatus(int statut) {
 		this.status = statut;
+	}
+	public List<EcoleEnseignantMatiereClasse> getEcoleEnseignantMatiereClasses() {
+		return ecoleEnseignantMatiereClasses;
+	}
+	public void setEcoleEnseignantMatiereClasses(List<EcoleEnseignantMatiereClasse> ecoleEnseignantMatiereClasses) {
+		this.ecoleEnseignantMatiereClasses = ecoleEnseignantMatiereClasses;
+	}
+	public Set<SuiviGeneral> getSuivis() {
+		return suivis;
+	}
+	public void setSuivis(Set<SuiviGeneral> suivis) {
+		this.suivis = suivis;
+	}
+	public List<EleveClasseAnnee> getEleveClasseAnnees() {
+		return eleveClasseAnnees;
+	}
+	public void setEleveClasseAnnees(List<EleveClasseAnnee> eleveClasseAnnees) {
+		this.eleveClasseAnnees = eleveClasseAnnees;
+	}
+	public Set<SuiviEleve> getSuiviEleves() {
+		return suiviEleves;
+	}
+	public void setSuiviEleves(Set<SuiviEleve> suiviEleves) {
+		this.suiviEleves = suiviEleves;
 	}
 
 	

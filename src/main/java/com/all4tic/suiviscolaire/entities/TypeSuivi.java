@@ -3,16 +3,19 @@ package com.all4tic.suiviscolaire.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public  class TypeSuivi implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id_type;
+	private int id_type;
 	private String libelle;
 	private String description;
 	private int status;
+	@OneToMany(mappedBy ="typeSuivi")
+	private Set<SuiviGeneral> suivis;
 	
 	public TypeSuivi() {
 	}
@@ -23,11 +26,13 @@ public  class TypeSuivi implements Serializable {
 		this.status = status;
 	}
 
-	public Long getId_type() {
+	
+
+	public int getId_type() {
 		return id_type;
 	}
 
-	public void setId_type(Long id_type) {
+	public void setId_type(int id_type) {
 		this.id_type = id_type;
 	}
 
@@ -55,6 +60,14 @@ public  class TypeSuivi implements Serializable {
 		this.status = status;
 	}
 	
+	public Set<SuiviGeneral> getSuivis() {
+		return suivis;
+	}
+
+	public void setSuivis(Set<SuiviGeneral> suivis) {
+		this.suivis = suivis;
+	}
+
 	@Override
 	public String toString() {
 		return "TypeSuivi{" +

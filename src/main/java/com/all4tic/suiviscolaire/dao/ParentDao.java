@@ -13,11 +13,6 @@ import java.util.List;
 @Repository
 public interface ParentDao extends CrudRepository<Parent, Long> {
 	
-	@Query("select distinct parent from Parent parent left join fetch parent.suivis")
-	List<Parent> findAllWithEagerRelationships();
-	
-	@Query("select parent from Parent parent left join fetch parent.suivis where  parent.id =:id")
-	Parent findOneWithEagerRelationships(@Param("id") Long id);
 	
 	
 }

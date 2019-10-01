@@ -1,0 +1,192 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="content">
+<div class="container-fluid">
+	<div class="inbox-mailbox-area mg-b-15">
+                <div class="container-fluid">
+                
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="inbox-email-menu-list compose-b-mg-30 shadow-reset">
+                                        <div class="compose-email">
+                                           <a  th:href="@{'/ecole/params/' +${ecole.id_ecole}}"><span th:text="${ecole.nom }"></a>
+                                        </div>
+                                        <ul class="nav nav-tabs">
+                                            <li>
+                                                <h4 class="Inbox-category-ad"><i class="fa fa-folder-o" aria-hidden="true"> </i> Liste des classes</h4>
+                                            </li>
+                                            <ul th:each="c: ${classes}">
+   												<li class=""><a  th:href="@{'/ecole/pclasse/' + ${c.id_classe}+'/'+${ecole.id_ecole}}" aria-expanded="false"><span class="inbox-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span><span th:text="${c.libelle}"></span></a>
+											   </li>
+											</ul>
+                                         
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sparkline10-list shadow-reset mg-t-30">
+                                <div class="sparkline10-hd">
+                                    <div class="main-sparkline10-hd">
+                                        <h1> <span th:text="${classe.code}">  </span> Année - Matiere - Enseignants </h1>
+                                        <div class="sparkline10-outline-icon">
+                                            <span class="sparkline10-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                            <span><i class="fa fa-wrench"></i></span>
+                                            <span class="sparkline10-collapse-close"><i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sparkline10-graph">
+                                    <div class="basic-login-form-ad">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="basic-login-inner inline-basic-form">
+                                                     <form  th:action="@{/ecole/pclasse}" th:object="${ecoleEnseignantMatiereClasse}" method="post">
+                                                    
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                             <div class="col-lg-3">
+                                                                    <select th:field="*{ecole}" class="form-control" >
+															   			 <option 
+															             th:value="${ecole.id_ecole}"
+															             th:text="${ ecole.nom}"/>
+																</select>
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                    <select th:field="*{classe}" class="form-control" >
+															   			 <option 
+															             th:value="${classe.id_classe}"
+															             th:text="${ classe.code}"/>
+																</select>
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                    <select th:field="*{annee}" class="form-control" >
+															   			 <option th:each="c: ${annees}"
+															             th:value="${c.id_annee}"
+															             th:text="${ c.libelle}"/>
+																</select>
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                <select th:field="*{matiere}" class="form-control" >
+															   			 <option th:each="c: ${matieres}"
+															             th:value="${c.id_matiere}"
+															             th:text="${ c.libelle}"/>
+																</select>
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                <select th:field="*{enseignant}" class="form-control" >
+															   			 <option th:each="c: ${enseignants}"
+															             th:value="${c.id_enseignant}"
+															             th:text="${ c.nom}"/>
+																</select>
+                                                                </div>
+                                                                <br/>
+                                                                <hr/>
+                                                                <div class="col-lg-2">
+                                                                   <button class="btn btn-sm btn-primary login-submit-cs" type="submit"> <i class="fa fa-save"> </i> Enregister</button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                     <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sparkline13-list shadow-reset">
+                                <div class="sparkline13-hd">
+                                    <div class="main-sparkline13-hd">
+                                        <h1>Liste des matières et des enseignants   de la classe :   <span th:text="${classe.code}">  </span></h1>
+                                       
+                                    </div>
+                                </div>
+                                <div class="sparkline13-graph">
+                                    <div class="">
+                                        
+                                        <div class="">
+                                        <div>
+                                        <div class="fixed-table-header" style="display: none;">
+                                        <table>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-body">
+                                        <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>
+                                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table table-hover JColResizer">
+                                            <thead>
+                                            <tr>
+		                                           
+		                                             <th style="width: 3.2%;" data-field="id" tabindex="0">
+		                                            <div class="th-inner ">Année</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 16.6%;" data-field="name" tabindex="0">
+		                                            <div class="th-inner ">Enseignant</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 14.1%;" data-field="email" tabindex="0">
+		                                            <div class="th-inner ">Matière</div>
+		                                            <div class="fht-cell"></div></th>
+		      
+		                                            <th style="width: 6.6%;" data-field="action" tabindex="0">
+		                                            <div class="th-inner ">Action</div><div class="fht-cell"></div></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-index="0"  th:each="e,iterationStatus : ${ecoleEnseignantMatiereClasses}"> 
+		                                           
+		                                             <td style="">
+		                                          			   <span th:text="${e.annee.getLibelle()}"> </span>
+		                                             </td>
+		                                              <td style="">
+		                                          			   <span th:text="${e.enseignant.getNom()}"> </span>
+		                                             </td>
+		                                             <td style="">
+		                                          			   <span th:text="${e.matiere.getLibelle()}"> </span>
+		                                             </td>
+		                                              <td style="">
+		                                          			   <a th:href="@{'/ecole/pclasse/' + ${e.id_ecolensmat}}" class="btn btn-custon-four btn-danger"><i class="fa fa-trash"></i>Retirer</a>
+		                                             </td>
+                                               </tr>
+                                             </tbody>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-footer" style="display: none;">
+                                       			 <table><tbody><tr></tr></tbody></table>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+</div>
+</body>
+
+</html>

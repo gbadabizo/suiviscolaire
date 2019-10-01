@@ -1,0 +1,188 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="content">
+<div class="container-fluid">
+	<div class="inbox-mailbox-area mg-b-15">
+                <div class="container-fluid">
+                
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="inbox-email-menu-list compose-b-mg-30 shadow-reset">
+                                        <div class="compose-email">
+                                           <span>Liste des ecoles</span>
+                                        </div>
+                                        <ul class="nav nav-tabs">
+                                            <ul th:each="c: ${ecoles}">
+   												<li class=""><a  th:href="@{'/eleve/add/' + ${c.id_ecole}}" aria-expanded="false"><span class="inbox-icon"><i class="fa fa-folder-o" aria-hidden="true"></i></span><span th:text="${c.nom}"></span></a>
+											  </li>
+											</ul>
+                                          
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                    <hr/>
+                               <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <p class="text-center"><h3>Ajouter un élève</h3></p>
+                                                <div class="basic-login-inner">
+                                                    <form  th:action="@{/eleve/add}" th:object="${eleve}" method="post">
+	                                                   <div class="row">
+	                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+	                                                   <select th:field="*{ecole}" class="form-control"  readonly>
+																   			 <option 
+																             th:value="${ecole.id_ecole}"
+																             th:text="${ ecole.nom}"/>
+													</select>
+													</div>
+													</div>
+                                                
+                                                    <div class="row">
+                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Nom</label>
+                                                            <input type="text" class="form-control"  th:field="*{nom}"  th:value="${eleve.nom}" placeholder="nom de l'élève">
+                                                        </div>
+                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Prénoms</label>
+                                                             <input type="text" class="form-control"  th:field="*{prenoms}"  th:value="${eleve.prenoms}" placeholder="prenoms">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Date de Naiss</label>
+                                                            <input type="date" class="form-control"  th:field="*{datenaiss}"  th:value="${eleve.datenaiss}" placeholder="date de naissance">
+                                                        </div>
+                                                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Matricule</label>
+                                                             <input type="text" class="form-control"  th:field="*{matricule}" th:value="${eleve.matricule}"  placeholder="Matricule">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Sexe</label>
+                                                            <select class="form-control" th:field="*{sexe}">
+                        											 <option value="M"> Masculin </option>
+                        											 <option value="F"> Féminin</option>
+                        											
+                       
+                  											</select>
+                                                        </div>
+                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 form-group">
+                                                            <label>Telephone</label>
+                                                            
+                                   							
+                       						                <input type="text" class="form-control"  th:field="*{telephone}"  th:value="${eleve.telephone}"  placeholder="telephone">
+                                                        </div>
+                                                    </div>
+                                                        <div class="login-btn-inner">
+                                                            <button type="submit" class="btn btn-custon-four btn-success" id="btnsave"><icon class="fa fa-save"></icon> Enregistrer</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                  <br/>
+                                            </div>
+                                          
+                              <hr/>
+                        <div class="col-lg-12">
+                            <div class="sparkline13-list shadow-reset">
+                                <div class="sparkline13-hd">
+                                    <div class="main-sparkline13-hd">
+                                        <h1>Liste eleves </h1>
+                                       
+                                    </div>
+                                </div>
+                                <div class="sparkline13-graph">
+                                    <div class="">
+                                        
+                                        <div class="">
+                                        <div>
+                                        <div class="fixed-table-header" style="display: none;">
+                                        <table>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-body">
+                                        <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>
+                                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table table-hover JColResizer">
+                                            <thead>
+                                            <tr>
+		                                           
+		                                             <th style="width: 3.2%;" data-field="Nom" tabindex="0">
+		                                            <div class="th-inner ">Nom</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 3.2%;" data-field="Prenoms" tabindex="0">
+		                                            <div class="th-inner ">Prénoms</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 16.6%;" data-field="Sexe" tabindex="0">
+		                                            <div class="th-inner ">Sexe</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 16.6%;" data-field="Matricule" tabindex="0">
+		                                            <div class="th-inner ">Matricule</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 5.6%;" data-field="actions" tabindex="0">
+		                                            <div class="th-inner ">Actions</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            
+		      
+		                                        
+		                                          
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-index="0"  th:each="e,iterationStatus : ${eleves}"> 
+		                                           
+		                                             <td style="">
+		                                          			   <span th:text="${e.nom}"> </span>
+		                                             </td>
+		                                             <td style="">
+		                                          			   <span th:text="${e.prenoms}"> </span>
+		                                             </td>
+		                                              <td style="">
+		                                          			   <span th:text="${e.sexe}"> </span>
+		                                             </td>
+		                                             <td style="">
+		                                          			   <span th:text="${e.matricule}"> </span>
+		                                             </td>
+		                                        <td style="">
+		                                          			   <a th:href="@{'/eleve/classe/' + ${e.id_eleve}}" class="btn btn-custon-four btn-default"><i class="fa fa-eye"> </i> Classes</a>
+		                                             </td>
+		                                              
+                                               </tr>
+                                             </tbody>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-footer" style="display: none;">
+                                       			 <table><tbody><tr></tr></tbody></table>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+</div>
+</body>
+
+</html>

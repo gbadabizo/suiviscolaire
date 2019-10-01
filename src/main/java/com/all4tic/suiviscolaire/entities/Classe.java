@@ -3,6 +3,7 @@ package com.all4tic.suiviscolaire.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,7 +16,10 @@ public class Classe implements Serializable{
 	private String libelle;
 	@Column(length = 10)
 	private String code ;
-	
+	@OneToMany(mappedBy ="classe")
+	private Set<SuiviGeneral> suivis ;
+	@OneToMany(mappedBy ="classe")
+	private Set<SuiviEleve> suiviEleve ;
 	private int status=1 ;
 	@ManyToMany(cascade = {
 	        CascadeType.REMOVE
@@ -28,6 +32,16 @@ public class Classe implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cycle")
     private Cycle cycle;
+	@OneToMany(
+			mappedBy="classe",
+	        cascade = CascadeType.REMOVE
+	    )
+	List<EcoleEnseignantMatiereClasse> ecoleEnseignantMatiereClasses ;
+	@OneToMany(
+			mappedBy="classe",
+	        cascade = CascadeType.REMOVE
+	    )
+	List<EleveClasseAnnee> eleveClasseAnnees ;
 	
 	public Classe()  {
 		super();
@@ -94,6 +108,30 @@ public class Classe implements Serializable{
 	}
 	public void setCycle(Cycle cycle) {
 		this.cycle = cycle;
+	}
+	public List<EcoleEnseignantMatiereClasse> getEcoleEnseignantMatiereClasses() {
+		return ecoleEnseignantMatiereClasses;
+	}
+	public void setEcoleEnseignantMatiereClasses(List<EcoleEnseignantMatiereClasse> ecoleEnseignantMatiereClasses) {
+		this.ecoleEnseignantMatiereClasses = ecoleEnseignantMatiereClasses;
+	}
+	public Set<SuiviGeneral> getSuivis() {
+		return suivis;
+	}
+	public void setSuivis(Set<SuiviGeneral> suivis) {
+		this.suivis = suivis;
+	}
+	public List<EleveClasseAnnee> getEleveClasseAnnees() {
+		return eleveClasseAnnees;
+	}
+	public void setEleveClasseAnnees(List<EleveClasseAnnee> eleveClasseAnnees) {
+		this.eleveClasseAnnees = eleveClasseAnnees;
+	}
+	public Set<SuiviEleve> getSuiviEleve() {
+		return suiviEleve;
+	}
+	public void setSuiviEleve(Set<SuiviEleve> suiviEleve) {
+		this.suiviEleve = suiviEleve;
 	}
 	
 	

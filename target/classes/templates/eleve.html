@@ -1,0 +1,126 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="content">
+<div class="container-fluid">
+	<div class="inbox-mailbox-area mg-b-15">
+                <div class="container-fluid">
+                
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="inbox-email-menu-list compose-b-mg-30 shadow-reset">
+                                        <div class="compose-email">
+                                           <span>Liste des ecoles</span>
+                                        </div>
+                                        <ul class="nav nav-tabs">
+                                            <ul th:each="c: ${ecoles}">
+   												<li class=""><a  th:href="@{'/eleve/add/' + ${c.id_ecole}}" aria-expanded="false"><span class="inbox-icon"><i class="fa fa-folder-o" aria-hidden="true"></i></span><span th:text="${c.nom}"></span></a>
+											  </li>
+											</ul>
+                                          
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                    <hr/>
+                               <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sparkline13-list shadow-reset">
+                                <div class="sparkline13-hd">
+                                    <div class="main-sparkline13-hd">
+                                        <h1>Liste eleves </h1>
+                                       
+                                    </div>
+                                </div>
+                                <div class="sparkline13-graph">
+                                    <div class="">
+                                        
+                                        <div class="">
+                                        <div>
+                                        <div class="fixed-table-header" style="display: none;">
+                                        <table>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-body">
+                                        <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>
+                                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table table-hover table-bordered JColResizer">
+                                            <thead>
+                                            <tr>
+		                                           
+		                                             <th style="width: 20.2%;" data-field="annee" tabindex="0">
+		                                            <div class="th-inner ">Nom</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 30.2%;" data-field="classe" tabindex="0">
+		                                            <div class="th-inner ">Prénoms</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 16.6%;" data-field="enseignant" tabindex="0">
+		                                            <div class="th-inner ">Sexe</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 16.6%;" data-field="enseignant" tabindex="0">
+		                                            <div class="th-inner ">Matricule</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 14.1%;" data-field="matiere" tabindex="0">
+		                                            <div class="th-inner ">Ecole</div>
+		                                            <div class="fht-cell"></div></th>
+		      
+		                                        
+		                                          
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-index="0"  th:each="e,iterationStatus : ${eleves}"> 
+		                                           
+		                                             <td style="">
+		                                          			   <span th:text="${e.nom}"> </span>
+		                                             </td>
+		                                             <td style="">
+		                                          			   <span th:text="${e.prenoms}"> </span>
+		                                             </td>
+		                                              <td style="">
+		                                          			   <span th:text="${e.sexe}"> </span>
+		                                             </td>
+		                                             <td style="">
+		                                          			   <span th:text="${e.matricule}"> </span>
+		                                             </td>
+		                                             <td style="">
+		                                          			   <span th:text="${e.ecole.getNom()}"> </span>
+		                                             </td>
+		                                              
+                                               </tr>
+                                             </tbody>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-footer" style="display: none;">
+                                       			 <table><tbody><tr></tr></tbody></table>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+</div>
+</body>
+
+</html>

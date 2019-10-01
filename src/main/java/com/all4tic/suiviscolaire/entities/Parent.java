@@ -32,11 +32,6 @@ public class Parent implements Serializable {
 	@JsonIgnore
 	private Set<Eleve> eleves = new HashSet<>();
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "PARENT_SUIVI",
-		joinColumns = { @JoinColumn(name = "PARENTS_ID")},
-		inverseJoinColumns = { @JoinColumn(name = "SUIVIS_ID")})
-	private Set<Suivi> suivis = new HashSet<>();
 	
 	public Parent(String nom, String prenoms, String telephone, String telephone2, String email, int statut) {
 		this.nom = nom;
@@ -111,14 +106,6 @@ public class Parent implements Serializable {
 		this.eleves = eleves;
 	}
 	
-	public Set<Suivi> getSuivis() {
-		return suivis;
-	}
-	
-	public void setSuivis(Set<Suivi> suivis) {
-		this.suivis = suivis;
-	}
-
 	
 	@Override
 	public String toString() {

@@ -3,6 +3,9 @@ package com.all4tic.suiviscolaire.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -38,6 +41,7 @@ public class Ecole implements Serializable{
 			mappedBy="ecole",
 	        cascade = CascadeType.REMOVE
 	    )
+	
 	List<EcoleEnseignant> ecoleEnseignants ;
 	@ManyToMany(cascade = {
 	        CascadeType.REMOVE
@@ -47,7 +51,16 @@ public class Ecole implements Serializable{
 	        inverseJoinColumns = @JoinColumn(name = "id_classe")
 	    )
 	private Set<Classe> classes = new HashSet<>();
-
+	@OneToMany(
+			mappedBy="ecole",
+	        cascade = CascadeType.REMOVE
+	    )
+	List<EcoleEnseignantMatiereClasse> ecoleEnseignantMatiereClasses ;
+	@OneToMany(
+			mappedBy="ecole",
+	        cascade = CascadeType.REMOVE
+	    )
+	List<Eleve> eleves ;
 	public Ecole() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -152,6 +165,22 @@ public class Ecole implements Serializable{
 
 	public void setClasses(Set<Classe> classes) {
 		this.classes = classes;
+	}
+
+	public List<EcoleEnseignantMatiereClasse> getEcoleEnseignantMatiereClasses() {
+		return ecoleEnseignantMatiereClasses;
+	}
+
+	public void setEcoleEnseignantMatiereClasses(List<EcoleEnseignantMatiereClasse> ecoleEnseignantMatiereClasses) {
+		this.ecoleEnseignantMatiereClasses = ecoleEnseignantMatiereClasses;
+	}
+
+	public List<Eleve> getEleves() {
+		return eleves;
+	}
+
+	public void setEleves(List<Eleve> eleves) {
+		this.eleves = eleves;
 	}
 	
 	

@@ -6,16 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CascadeType;
+
 import com.all4tic.suiviscolaire.entities.Ecole;
 import com.all4tic.suiviscolaire.entities.Enseignant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="ecole_enseignant")
 public class EcoleEnseignant implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_ecolens ;
+	@ManyToOne()
 	private Ecole ecole;
+	@ManyToOne()
 	private Enseignant enseignant;
 	private int status =1;
 	public EcoleEnseignant() {
@@ -41,6 +48,7 @@ public class EcoleEnseignant implements Serializable{
 	public void setEcole(Ecole ecole) {
 		this.ecole = ecole;
 	}
+	@JsonIgnore
 	public Enseignant getEnseignant() {
 		return enseignant;
 	}

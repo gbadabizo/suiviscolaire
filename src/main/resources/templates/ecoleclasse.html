@@ -1,0 +1,148 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="content">
+<div class="container-fluid">
+<div class="row">
+                        <div class="col-lg-10">
+                            <div class="sparkline8-list basic-res-b-30 shadow-reset">
+                                <div class="sparkline8-hd">
+                                    <div class="main-sparkline8-hd">
+                                        <h1>Classe  de l'ecole   <span th:text="${ecole.nom }">  </span> </h1>
+                                        <div class="sparkline8-outline-icon">
+                                            <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                            <span><i class="fa fa-wrench"></i></span>
+                                            <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sparkline8-graph">
+                                    <div class="basic-login-form-ad">
+                                        
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="basic-login-inner">
+                                                    <form  th:action="@{/ecole/classeadd}" th:object="${classeEcole}" method="post">
+                                                    <div class="row">
+                                                   
+                                                            <input type="hidden" class="form-control"  th:field="*{ecole}"   th:value="${ecole.nom}" placeholder="nom du professeur ">
+                                                       
+                                                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 chosen-select-single">
+                                                          
+                                                    <label>Classe:</label>
+                                                    <select class="select2_demo_2 form-control select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true"  th:field="*{classes}">
+                                                        <option th:each="c: ${cls}"
+													             th:value="${c.id_classe}"
+													             th:text="${ c.libelle}"/>
+                                                    </select>
+                                               
+                                                        </div>
+                                 
+                                                    </div>
+                                               <hr/>
+                                                        <div class="login-btn-inner">
+                                                            <button type="submit" class="btn btn-custon-four btn-success" id="btnsave"><icon class="fa fa-save"></icon> Enregistrer</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                                            		<div class="">
+                                           				<img  th:src="@{/img/img1.jpg}" alt="image">
+                                    
+                                      				  </div>
+                                            </div>
+                    </div>
+                    <br/>
+                    <hr/>
+     <div class="row">
+    <div class="data-table-area mg-b-15">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sparkline13-list shadow-reset">
+                                <div class="sparkline13-hd">
+                                    <div class="main-sparkline13-hd">
+                                        <h1>Liste<span class="table-project-n"> des classes</span></h1>
+                                       
+                                    </div>
+                                </div>
+                                <div class="sparkline13-graph">
+                                    <div class="">
+                                        
+                                        <div class="">
+                                        <div>
+                                        <div class="fixed-table-header" style="display: none;">
+                                        <table>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-body">
+                                        <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>
+                                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table table-hover JColResizer">
+                                            <thead>
+                                            <tr>
+		                                            <th style="width: 3.2%;" data-field="id" tabindex="0">
+		                                            <div class="th-inner ">#</div>
+		                                            <div class="fht-cell"></div>
+		                                            </th>
+		                                            <th style="width: 16.6%;" data-field="name" tabindex="0">
+		                                            <div class="th-inner ">Libelle</div><div class="fht-cell"></div></th>
+		                                            <th style="width: 14.1%;" data-field="email" tabindex="0">
+		                                            <div class="th-inner ">Code</div>
+		                                            <div class="fht-cell"></div></th>
+		      
+		                                            <th style="width: 6.6%;" data-field="action" tabindex="0">
+		                                            <div class="th-inner ">Action</div><div class="fht-cell"></div></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-index="0"  th:each="e,iterationStatus : ${classes}"> 
+		                                             <td style="" th:text="${iterationStatus.count}">1</td> 
+		                                             <td style="">
+		                                          			   <span th:text="${e.libelle}"> </span>
+		                                             </td>
+		                                              <td style="">
+				                                        <span th:text="${e.code}">  </span>
+				                                          </td> 
+				                                          
+		                                                <td class="datatable-ct" style="">
+		                                               	<div class="button-style-four btn-mg-b-10">
+				                                             
+									                             <a th:href="@{'/ecole/delclasse/' + ${e.id_classe}}" class="btn btn-custon-four btn-danger"><i class="fa fa-trash"></i>retirer</a>
+                                  						  </div>
+		                                             		</td>
+                                               </tr>
+                                             </tbody>
+                                        </table>
+                                        </div>
+                                        <div class="fixed-table-footer" style="display: none;">
+                                       			 <table><tbody><tr></tr></tbody></table>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+           </div> 
+</div>
+</body>
+
+</html>

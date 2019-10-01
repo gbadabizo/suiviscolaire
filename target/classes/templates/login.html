@@ -1,0 +1,126 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layout2}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="content">
+		<div class="container-fluid">
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		  <div class="row">
+		  <div class="col-lg-2">
+		  <div class="logo">
+                     <a href="#"><img src="img/logo/logo.png" alt="">
+                     </a>
+           </div>
+		  </div>
+		  <div class="col-lg-8">
+                            <div class="sparkline9-list shadow-reset">
+                                <div class="sparkline9-hd">
+                                    <div class="main-sparkline9-hd">
+                                        <h1 style="text-align:center">Espace d'administration  </h1>
+                                        
+                                    </div>
+                                </div>
+                                <div class="sparkline9-graph">
+                                    <div class="basic-login-form-ad">
+                                       
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="basic-login-inner">
+                                                    <h3 style="text-align:center">Veillez- vous connecter </h3>
+                                                   
+                                                  <form name="f" th:action="@{/login}" method="post" id="adminpro-form" class="adminpro-form">
+                                                        <!-- Thymeleaf + Spring Security error display -->
+								                        <div th:if="${param.error}" class="alert alert-danger">
+								                            Invalid username and password.
+								                        </div>
+								
+								                        <div th:if="${param.logout}" class="alert alert-success">
+								                            You have been logged out.
+								                        </div>
+								                        <br/>
+								                        <hr/>
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-2">
+                                                                    <label class="login2">Identifiant:</label>
+                                                                </div>
+                                                                <div class="col-lg-10">
+                                                                    <input type="text" class="form-control" id="username" name="username"    placeholder="identifiant">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-2">
+                                                                    <label class="login2">Mot de passe:</label>
+                                                                </div>
+                                                                <div class="col-lg-10">
+                                                                  <input type="password" class="form-control" id="password" name="password"    placeholder="mot de passe">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="login-btn-inner">
+                                                            <div class="row">
+                                                                <div class="col-lg-2"></div>
+                                                                <div class="col-lg-10">
+                                                                    <div class="i-checks">
+                                                                        <label>
+                                                                          
+                                                                            <input type="checkbox"    id="remember-me" name="remember-me">
+  
+                                                                             Remember me </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-5"></div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="login-horizontal">
+                                                                        <button class="btn btn-success login-submit-cs" type="button"  id="submit_id" ><i class="fa fa-lock"></i> Connexion</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+		    <div class="col-lg-2"></div>
+		  
+		  
+		</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(e){
+		$("#submit_id").click(function(){
+			// e.preventDefault();
+			 var form = $(this).parents('form');
+			 var username=$("#username").val();
+			 var pass= $("#password").val();
+			 if((username.length==0)||(password.length)){
+				 Swal.fire({
+					  type: 'error',
+					  title: 'Oops...',
+					  text: 'Veillez remplir votre identifiant et mot de passe!',
+					  footer: ''
+					})
+			 }else{
+				 form.submit();
+			 }
+		});
+	});
+</script>
+</body>
+
+
+</html>

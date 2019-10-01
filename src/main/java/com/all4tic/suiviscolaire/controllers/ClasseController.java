@@ -1,6 +1,7 @@
 package com.all4tic.suiviscolaire.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.all4tic.suiviscolaire.dao.CycleDao;
 import com.all4tic.suiviscolaire.entities.Classe;
+import com.all4tic.suiviscolaire.entities.ClasseMatiere;
 import com.all4tic.suiviscolaire.entities.Matiere;
 import com.all4tic.suiviscolaire.service.ClasseService;
+import com.all4tic.suiviscolaire.service.MatiereService;
 
 @Controller
 public class ClasseController {
@@ -24,6 +27,8 @@ public class ClasseController {
 	private  ClasseService classeService ;
 	@Autowired
 	private CycleDao cycleDao ;
+	@Autowired
+	private MatiereService matiereService;
 	@GetMapping(value="/classe")
 	public String index(Model model) {
 		model.addAttribute("classes", classeService.listClasse());
@@ -57,7 +62,39 @@ public class ClasseController {
 		  classeService.delete(id);
 		  return "redirect:/classe";
 	}
-
+	@GetMapping(value="/classe/matiere/{id}")
+	public String  addMatiere(@PathVariable("id") int id, Model model) {
+		//id classe
+		Classe classe = classeService.getClasseById(id);
+		System.out.println(classe.getCode());
+		model.addAttribute("classe", classe);
+		Set<Matiere> matieres = classe.getMatieres();
+		List<Matiere> mats = matiereService.listMatiere();
+		ClasseMatiere classeMatiere = new ClasseMatiere();
+		classeMatiere.setClasse(classe);
+		System.out.println(classeMatiere);
+		model.addAttribute("matieres", matieres);
+		model.addAttribute("mats", mats);
+		model.addAttribute("classeMatiere", classeMatiere);
+		model.addAttribute("cls", classeService.listClasse());
+		return "classematiere" ;
+		
+	}
+	
+	@PostMapping(value="/classe/matadd")
+	public String addMatiereCl(@ModelAttribute ClasseMatiere classeMatiere, BindingResult bindingResult, Model model) {
+		
+		if(classeMatiere != null) {
+			System.out.println(classeMatiere.getClasse());
+			Classe classe = classeMatiere.getClasse();
+			Set<Matiere>matieres = classeMatiere.getMatieres();
+			classe.setMatieres(matieres);
+			classeService.save(classe);
+			return "redirect:/classe/matiere/"+classe.getId_classe();
+		}
+		return "redirect:/classe";
+		
+	}
 	
 
 }

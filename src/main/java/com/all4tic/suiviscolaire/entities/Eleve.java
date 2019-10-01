@@ -3,7 +3,9 @@ package com.all4tic.suiviscolaire.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date ;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -18,10 +20,13 @@ public class Eleve implements Serializable {
 	@NotNull
 	private String prenoms;
 	private char sexe;
-	private String adresse;
 	private String telephone;
 	private String matricule ;
-	private int statut;
+	@Temporal(TemporalType.DATE)
+	private Date datenaiss ;
+	private int statut=1;
+	@OneToMany(mappedBy ="eleve")
+	private Set<SuiviEleve> suivis ;
 	
 	@ManyToMany
 	@JoinTable(name = "eleve_parent",
@@ -30,13 +35,22 @@ public class Eleve implements Serializable {
 	private Set<Parent> parents = new HashSet<>();
 	
 	@ManyToOne
-    Classe classe;
-	
-	public Eleve(String nom, String prenoms, char sexe, String adresse, String telephone, int statut) {
+    Ecole ecole;
+	@OneToMany(
+			mappedBy="eleve",
+	        cascade = CascadeType.REMOVE
+	    )
+	List<EleveClasseAnnee> eleveClasseAnnees ;
+	public Eleve() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Eleve(String nom, String prenoms, char sexe, String telephone, int statut) {
 		this.nom = nom;
 		this.prenoms = prenoms;
 		this.sexe = sexe;
-		this.adresse = adresse;
+		
 		this.telephone = telephone;
 		this.statut = statut;
 	}
@@ -89,14 +103,6 @@ public class Eleve implements Serializable {
 		this.sexe = sexe;
 	}
 	
-	public String getAdresse() {
-		return adresse;
-	}
-	
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-	
 	public String getTelephone() {
 		return telephone;
 	}
@@ -121,26 +127,45 @@ public class Eleve implements Serializable {
 		this.parents = parents;
 	}
 	
-	public Classe getClasse() {
-		return classe;
+
+	public Ecole getEcole() {
+		return ecole;
+	}
+
+	public void setEcole(Ecole ecole) {
+		this.ecole = ecole;
 	}
 	
-	public void setClasse(Classe classe) {
-		this.classe = classe;
+	public Date getDatenaiss() {
+		return datenaiss;
 	}
-	
-	
-	
+
+	public void setDatenaiss(Date datenaiss) {
+		this.datenaiss = datenaiss;
+	}
+
 	@Override
 	public String toString() {
-		return "Eleve{" +
-			"id=" + id_eleve +
-			", nom='" + nom + '\'' +
-			", prenoms='" + prenoms + '\'' +
-			", sexe=" + sexe +
-			", adresse='" + adresse + '\'' +
-			", telephone='" + telephone + '\'' +
-			", status=" + statut +
-			'}';
+		return "Eleve [id_eleve=" + id_eleve + ", nom=" + nom + ", prenoms=" + prenoms + ", sexe=" + sexe
+				+ ", telephone=" + telephone + ", matricule=" + matricule + ", datenaiss=" + datenaiss + ", statut="
+				+ statut + ", parents=" + parents + ", ecole=" + ecole + "]";
 	}
+
+	public Set<SuiviEleve> getSuivis() {
+		return suivis;
+	}
+
+	public void setSuivis(Set<SuiviEleve> suivis) {
+		this.suivis = suivis;
+	}
+
+	public List<EleveClasseAnnee> getEleveClasseAnnees() {
+		return eleveClasseAnnees;
+	}
+
+	public void setEleveClasseAnnees(List<EleveClasseAnnee> eleveClasseAnnees) {
+		this.eleveClasseAnnees = eleveClasseAnnees;
+	}
+
+	
 }
