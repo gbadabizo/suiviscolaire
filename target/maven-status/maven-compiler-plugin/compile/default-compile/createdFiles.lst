@@ -1,11 +1,14 @@
 com/all4tic/suiviscolaire/security/MultiHttpSecurityConfig$FormLoginWebSecurityConfigurerAdapter.class
 com/all4tic/suiviscolaire/dao/EcoleEnseignantDao.class
 com/all4tic/suiviscolaire/service/MatiereServiceImpl.class
+com/all4tic/suiviscolaire/dao/ActivationDao.class
 com/all4tic/suiviscolaire/dao/EnseignantDao.class
 com/all4tic/suiviscolaire/service/StorageService.class
 com/all4tic/suiviscolaire/restcontrollers/SuiviEleveRestConroller.class
 com/all4tic/suiviscolaire/utilities/Utility.class
+com/all4tic/suiviscolaire/restcontrollers/ParentRestController.class
 com/all4tic/suiviscolaire/dao/CycleDao.class
+com/all4tic/suiviscolaire/utilities/ParentRegister.class
 com/all4tic/suiviscolaire/dto/SuiviGeneralDto.class
 com/all4tic/suiviscolaire/dao/AnneeDao.class
 com/all4tic/suiviscolaire/dao/ParentDao.class
@@ -38,6 +41,7 @@ com/all4tic/suiviscolaire/dao/EleveDao.class
 com/all4tic/suiviscolaire/entities/EcoleClasseAnnee.class
 com/all4tic/suiviscolaire/dto/EcoleDto.class
 com/all4tic/suiviscolaire/dao/ClasseDao.class
+com/all4tic/suiviscolaire/utilities/SendSms.class
 com/all4tic/suiviscolaire/entities/ClasseEcole.class
 com/all4tic/suiviscolaire/security/User.class
 com/all4tic/suiviscolaire/utilities/EleveByClasse.class
@@ -78,6 +82,8 @@ com/all4tic/suiviscolaire/dao/SuiviEleveDao.class
 com/all4tic/suiviscolaire/service/EnseignantService.class
 com/all4tic/suiviscolaire/entities/EcoleEnseignantMatiereClasse.class
 com/all4tic/suiviscolaire/dto/MatiereDto.class
+com/all4tic/suiviscolaire/entities/Activation.class
+com/all4tic/suiviscolaire/security/WebSecurityCorsFilter.class
 com/all4tic/suiviscolaire/dao/EcoleDao.class
 com/all4tic/suiviscolaire/utilities/ListSuivi.class
 com/all4tic/suiviscolaire/dto/EleveDto.class

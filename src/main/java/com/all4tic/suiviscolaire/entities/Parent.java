@@ -27,9 +27,10 @@ public class Parent implements Serializable {
 	
 	
 	private int statut;
-	
-	@ManyToMany(mappedBy = "parents")
-	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "eleve_parent",
+		joinColumns = { @JoinColumn(name = "id_parent")},
+		inverseJoinColumns = { @JoinColumn(name = "id_eleve")})
 	private Set<Eleve> eleves = new HashSet<>();
 	
 	
@@ -41,6 +42,13 @@ public class Parent implements Serializable {
 		this.email = email;
 		this.statut = statut;
 	}
+	
+
+	public Parent() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public Long getId_parent() {
 		return id_parent;

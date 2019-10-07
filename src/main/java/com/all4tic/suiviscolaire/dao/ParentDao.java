@@ -12,7 +12,5 @@ import java.util.List;
 
 @Repository
 public interface ParentDao extends CrudRepository<Parent, Long> {
-	
-	
-	
+		Parent findByNomAndTelephoneAndStatut(String nom, String telephone, int statut);
 }

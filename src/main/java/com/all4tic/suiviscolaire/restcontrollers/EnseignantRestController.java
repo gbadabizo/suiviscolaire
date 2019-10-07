@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.all4tic.suiviscolaire.dao.AnneeDao;
 import com.all4tic.suiviscolaire.dao.EcoleEnseignantMatiereDao;
 import com.all4tic.suiviscolaire.dao.EleveClasseAnneeDao;
+import com.all4tic.suiviscolaire.dao.MessageDao;
 import com.all4tic.suiviscolaire.dao.SuiviGeneralDao;
 import com.all4tic.suiviscolaire.dao.TypeSuiviDao;
 import com.all4tic.suiviscolaire.dto.ClasseDto;
@@ -32,6 +33,7 @@ import com.all4tic.suiviscolaire.entities.EcoleEnseignantMatiereClasse;
 import com.all4tic.suiviscolaire.entities.Eleve;
 import com.all4tic.suiviscolaire.entities.EleveClasseAnnee;
 import com.all4tic.suiviscolaire.entities.Enseignant;
+import com.all4tic.suiviscolaire.entities.Message;
 import com.all4tic.suiviscolaire.entities.SuiviGeneral;
 import com.all4tic.suiviscolaire.security.User;
 import com.all4tic.suiviscolaire.security.UserRepository;
@@ -72,6 +74,8 @@ public class EnseignantRestController {
 	private TypeSuiviDao typeSuiviDao;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private MessageDao messageDao ;
 	// renvoie la liste des ecole dans lesquelle l'enseignant intervient
 	@GetMapping("/ecoles")
 	public Reponse getEcoles(Principal user) {
@@ -105,8 +109,10 @@ public class EnseignantRestController {
 		}
 		return reponse ;
 	}
-	@GetMapping("/classes/{idecole}/{idens}/{idannee}")
-	public Reponse getClasses(@PathVariable int idecole, @PathVariable int idens , @PathVariable int idannee) {
+	@GetMapping("/classes/{idecole}/{idannee}")
+	public Reponse getClasses(@PathVariable int idecole , @PathVariable int idannee, Principal user) {
+		User u = userRepository.findByUsername(user.getName());
+		int idens= u.getIsenseignant();
 		Reponse reponse = new Reponse();
 		reponse.setCode(Utility.FAILLURE_CODE);
 		reponse.setMessage("ECHEC");
@@ -276,6 +282,25 @@ public class EnseignantRestController {
 				suiviGeneralDto.setTypesuivi(suivig.getTypeSuivi().getId_type());
 				reponse =this.getReponse(Utility.SUCCESSFUL_CODE, "SUCCES",suiviGeneralDto);
 			}
+			return reponse;
+		}
+		
+		@PostMapping("/sendmsg")
+		public Reponse sendmsg(@RequestBody Message msg) {
+			Reponse reponse =this.getReponse(Utility.FAILLURE_CODE, "ECHEC", null);
+			if(msg!=null) {
+				Message msgSave= messageDao.save(msg);
+				 reponse =this.getReponse(Utility.SUCCESSFUL_CODE, "SUCCES", msgSave);
+			}	
+			return reponse;
+			}
+		@GetMapping("/getmsg")
+		public Reponse getMsg(Principal user) {
+			Reponse reponse =this.getReponse(Utility.FAILLURE_CODE, "ECHEC", null);
+			User u = userRepository.findByUsername(user.getName());
+			int idens= u.getIsenseignant();
+			List<Message>messages= messageDao.findAllBySenderOrReceiverOrderByDatemessageDesc(idens, idens);
+			reponse =this.getReponse(Utility.SUCCESSFUL_CODE, "SUCCES", messages);
 			return reponse;
 		}
 	

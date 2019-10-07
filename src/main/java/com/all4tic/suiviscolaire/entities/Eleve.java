@@ -28,10 +28,7 @@ public class Eleve implements Serializable {
 	@OneToMany(mappedBy ="eleve")
 	private Set<SuiviEleve> suivis ;
 	
-	@ManyToMany
-	@JoinTable(name = "eleve_parent",
-		joinColumns = { @JoinColumn(name = "id_eleve")},
-		inverseJoinColumns = { @JoinColumn(name = "id_parent")})
+	@ManyToMany(mappedBy = "eleves")
 	private Set<Parent> parents = new HashSet<>();
 	
 	@ManyToOne

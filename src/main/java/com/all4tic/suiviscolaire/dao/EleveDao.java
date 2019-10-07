@@ -11,5 +11,6 @@ import java.util.List;
 public interface EleveDao extends CrudRepository<Eleve, Long> {
 	List<Eleve> findAllByEcoleAndStatut(Ecole ecole, int statut);
 	List<Eleve> findAllByStatut(int statut);
+	Eleve findByEcoleAndMatricule(Ecole ecole, String matricule);
 	
 }

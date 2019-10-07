@@ -13,4 +13,5 @@ import com.all4tic.suiviscolaire.entities.EleveClasseAnnee;
 public interface EleveClasseAnneeDao extends CrudRepository<EleveClasseAnnee, Long> {
 		List<EleveClasseAnnee>findAllByEleveAndStatut(Eleve eleve, int statut);
 		List<EleveClasseAnnee>findAllByClasseAndAnneeAndStatut(Classe classe, Annee annee, int statut);
+		EleveClasseAnnee findByEleveAndAndAnneeAndStatut(Eleve eleve, Annee annee, int statut);
 }

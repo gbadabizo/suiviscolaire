@@ -1,5 +1,6 @@
 package com.all4tic.suiviscolaire.restcontrollers;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,8 @@ import com.all4tic.suiviscolaire.entities.Ecole;
 import com.all4tic.suiviscolaire.entities.Eleve;
 import com.all4tic.suiviscolaire.entities.Enseignant;
 import com.all4tic.suiviscolaire.entities.Matiere;
+import com.all4tic.suiviscolaire.security.User;
+import com.all4tic.suiviscolaire.security.UserRepository;
 import com.all4tic.suiviscolaire.service.ClasseService;
 import com.all4tic.suiviscolaire.service.EcoleService;
 import com.all4tic.suiviscolaire.service.EleveService;
@@ -46,8 +49,12 @@ public class UtilityRestController {
 	EleveService eleveService;
 	@Autowired
 	AnneeDao anneeDao ;
-	@GetMapping("/enseignant/{id}")
-	public Reponse getEnseignant(@PathVariable int id) {
+	@Autowired
+	private UserRepository userRepository;
+	@GetMapping("/enseignant")
+	public Reponse getEnseignant(Principal User) {
+		User u = userRepository.findByUsername(User.getName());
+		int id= u.getIsenseignant();
 		Reponse reponse =this.getReponse(Utility.FAILLURE_CODE, "ECHEC", null);
 		Enseignant e = enseignantService.getEnseignantById(id);
 		EnseignantDto edto =new EnseignantDto();
@@ -123,24 +130,7 @@ public class UtilityRestController {
 			}
 			return reponse ;
 	}
-	@GetMapping("/annees")
-	public Reponse getAnnees() {
-	Reponse reponse =this.getReponse(Utility.FAILLURE_CODE, "ECHEC", null);
-		List<Annee> annees = anneeDao.findByStatus(1);
-		if(!annees.isEmpty()) {
-			List<AnneeDto> anneesDto=new ArrayList<>();
-			for(Annee annee : annees) {
-			AnneeDto anneeDto = new AnneeDto();
-			anneeDto.setId_annee(annee.getId_annee());
-			anneeDto.setLibelle(annee.getLibelle());
-			anneeDto.setDate_debut(annee.getDate_debut());
-			anneeDto.setDate_fin(annee.getDate_fin());
-			anneesDto.add(anneeDto);
-			}
-			reponse =this.getReponse(Utility.SUCCESSFUL_CODE, "SUCCES",anneesDto);
-		}
-		return reponse ;
-}
+	
 	private Reponse getReponse(int code, String message, Object o) {
 		Reponse reponse = new Reponse();
 		reponse.setCode(code);

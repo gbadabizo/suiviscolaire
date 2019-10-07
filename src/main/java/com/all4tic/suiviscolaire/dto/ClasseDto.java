@@ -7,6 +7,7 @@ public class ClasseDto {
 			private String libelle;
 			private String code ;
 			private int status=1 ;
+			private int cycle;
 			public ClasseDto(int id_classe, String libelle, String code, int status) {
 				super();
 				this.id_classe = id_classe;
@@ -41,6 +42,12 @@ public class ClasseDto {
 			}
 			public void setStatus(int status) {
 				this.status = status;
+			}
+			public int getCycle() {
+				return cycle;
+			}
+			public void setCycle(int cycle) {
+				this.cycle = cycle;
 			}
 			
 	

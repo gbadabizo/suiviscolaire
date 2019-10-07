@@ -17,6 +17,7 @@
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/utilities/SuiviG.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dto/SuviEleveDto.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/utilities/suiviEl.java
+/Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/SouscriptionMatiere.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/utilities/ClasseMatiere.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/utilities/ParentRegister.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/service/AnneeServiceImpl.java
@@ -30,6 +31,7 @@
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/SuiviscolaireApplication.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/SuiviGeneralDao.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/service/StorageService.java
+/Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/Message.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/ActivationDao.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/service/ClasseService.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/security/DbInit.java
@@ -38,12 +40,14 @@
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dto/AnneeDto.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/EleveClasseAnneeDao.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/EleveClasseAnnee.java
+/Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/MessageDao.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/controllers/EnseignantController.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/ServletInitializer.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/utilities/Utility.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/utilities/SendSms.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/security/WebSecurityCorsFilter.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dto/MatiereDto.java
+/Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/utilities/AddParent.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/TypeSuivi.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/service/MatiereService.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/security/MultiHttpSecurityConfig.java
@@ -62,6 +66,8 @@
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/EcoleEnseignantDao.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/Matiere.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dto/EcoleDto.java
+/Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/SouscriptionMatiereDao.java
+/Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/Souscription.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/EcoleEnseignantMatiereClasse.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/security/User.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/Annee.java
@@ -75,6 +81,7 @@
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/service/ClasseServiceImpl.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/EcoleEnseignantMatiereDao.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dto/Userdto.java
+/Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/SouscriptionDao.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/Classe.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/service/EcoleServiceImpl.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dao/ParentDao.java
