@@ -25,6 +25,9 @@ public class Souscription implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_classe")
 	private Classe classe;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_parent")
+	private Parent parent;
 	private Date dateSouscription = new Date();
 	private int statut=1;
 	public Souscription() {
@@ -49,6 +52,25 @@ public class Souscription implements Serializable{
 		this.classe = classe;
 		this.dateSouscription = dateSouscription;
 		this.statut = statut;
+	}
+	
+	public Souscription(int id_souscription, Eleve eleve, Annee annee, Classe classe, Parent parent,
+			Date dateSouscription, int statut) {
+		super();
+		this.id_souscription = id_souscription;
+		this.eleve = eleve;
+		this.annee = annee;
+		this.classe = classe;
+		this.parent = parent;
+		this.dateSouscription = dateSouscription;
+		this.statut = statut;
+	}
+	
+	public Parent getParent() {
+		return parent;
+	}
+	public void setParent(Parent parent) {
+		this.parent = parent;
 	}
 	public int getId_souscription() {
 		return id_souscription;
@@ -85,6 +107,12 @@ public class Souscription implements Serializable{
 	}
 	public void setStatut(int statut) {
 		this.statut = statut;
+	}
+	@Override
+	public String toString() {
+		return "Souscription [id_souscription=" + id_souscription + ", eleve=" + eleve + ", annee=" + annee
+				+ ", classe=" + classe + ", parent=" + parent.getNom() + ", dateSouscription=" + dateSouscription + ", statut="
+				+ statut + "]";
 	}
 	
 }

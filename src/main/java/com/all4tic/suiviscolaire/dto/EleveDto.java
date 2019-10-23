@@ -11,6 +11,9 @@ public class EleveDto {
 	private String telephone;
 	private String matricule ;
 	private Date datenaiss ;
+	private String ecole ;
+	private String annee;
+	private String classe;
 	private int statut;
 	public EleveDto(Long id_eleve, String nom, String prenoms, char sexe, String telephone, String matricule,
 			Date datenaiss, int statut) {
@@ -27,6 +30,54 @@ public class EleveDto {
 	public EleveDto() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public EleveDto(Long id_eleve, String nom, String prenoms, char sexe, String telephone, String matricule,
+			Date datenaiss, String ecole, int statut) {
+		super();
+		this.id_eleve = id_eleve;
+		this.nom = nom;
+		this.prenoms = prenoms;
+		this.sexe = sexe;
+		this.telephone = telephone;
+		this.matricule = matricule;
+		this.datenaiss = datenaiss;
+		this.ecole = ecole;
+		this.statut = statut;
+	}
+	
+	public EleveDto(Long id_eleve, String nom, String prenoms, char sexe, String telephone, String matricule,
+			Date datenaiss, String ecole, String annee, String classe, int statut) {
+		super();
+		this.id_eleve = id_eleve;
+		this.nom = nom;
+		this.prenoms = prenoms;
+		this.sexe = sexe;
+		this.telephone = telephone;
+		this.matricule = matricule;
+		this.datenaiss = datenaiss;
+		this.ecole = ecole;
+		this.annee = annee;
+		this.classe = classe;
+		this.statut = statut;
+	}
+	public String getAnnee() {
+		return annee;
+	}
+	public void setAnnee(String annee) {
+		this.annee = annee;
+	}
+	public String getClasse() {
+		return classe;
+	}
+	public void setClasse(String classe) {
+		this.classe = classe;
+	}
+	public String getEcole() {
+		return ecole;
+	}
+	public void setEcole(String ecole) {
+		this.ecole = ecole;
 	}
 	public Long getId_eleve() {
 		return id_eleve;

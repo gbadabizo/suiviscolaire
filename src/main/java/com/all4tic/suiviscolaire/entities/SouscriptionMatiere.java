@@ -73,6 +73,11 @@ public class SouscriptionMatiere {
 	public void setStatut(int statut) {
 		this.statut = statut;
 	}
+	@Override
+	public String toString() {
+		return "SouscriptionMatiere [id_sm=" + id_sm + ", matiere=" + matiere + ", souscription=" + souscription
+				+ ", datedebut=" + datedebut + ", datefin=" + datefin + ", statut=" + statut + "]";
+	}
 	
 	
 }

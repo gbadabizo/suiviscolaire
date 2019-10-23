@@ -15,6 +15,7 @@ public class SuviEleveDto {
 	private Date datefin;
 	private String libMatiere;
 	private String codeMatiere;
+	private String classe ;
 	public SuviEleveDto(long id_suivi, int assiduite, int retard, int exo_maison, int absence, String observation,
 			int status, Date datesuivi, Date datedebut, Date datefin) {
 		super();
@@ -51,6 +52,34 @@ public class SuviEleveDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public SuviEleveDto(long id_suivi, int assiduite, int retard, int exo_maison, int absence, String observation,
+			int status, Date datesuivi, Date datedebut, Date datefin, String libMatiere, String codeMatiere,
+			String classe) {
+		super();
+		this.id_suivi = id_suivi;
+		this.assiduite = assiduite;
+		this.retard = retard;
+		this.exo_maison = exo_maison;
+		this.absence = absence;
+		this.observation = observation;
+		this.status = status;
+		this.datesuivi = datesuivi;
+		this.datedebut = datedebut;
+		this.datefin = datefin;
+		this.libMatiere = libMatiere;
+		this.codeMatiere = codeMatiere;
+		this.classe = classe;
+	}
+
+	public String getClasse() {
+		return classe;
+	}
+
+	public void setClasse(String classe) {
+		this.classe = classe;
+	}
+
 	public long getId_suivi() {
 		return id_suivi;
 	}

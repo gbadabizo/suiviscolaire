@@ -59,6 +59,7 @@
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/Parent.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/restcontrollers/AuthenticationRestService.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/service/EleveService.java
+/Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/dto/MatSouscription.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/controllers/EleveController.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/entities/SuiviEleve.java
 /Users/edem/Documents/mesprojets/spring/suiviscolaire/src/main/java/com/all4tic/suiviscolaire/security/UserPrincipal.java

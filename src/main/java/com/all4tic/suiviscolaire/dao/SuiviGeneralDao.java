@@ -8,7 +8,8 @@ import com.all4tic.suiviscolaire.entities.Matiere;
 import com.all4tic.suiviscolaire.entities.SuiviGeneral;
 
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,8 @@ public interface SuiviGeneralDao extends CrudRepository<SuiviGeneral, Long> {
 	List<SuiviGeneral> findAllByEnseignantAndAnneeAndStatus(Enseignant enseignant , Annee annee, int statut) ;
 	List<SuiviGeneral> findAllByEnseignantAndAnneeAndClasseAndEcole(Enseignant enseignant , Annee annee,Classe classe,Ecole ecole) ;
 	List<SuiviGeneral> findAllByEnseignantAndAnneeAndMatiereAndStatus(Enseignant enseignant , Annee annee,Matiere matiere, int statut) ;
+	Page<SuiviGeneral> findAllByAnneeAndClasseAndEcoleAndStatusOrderByDatesuiviDesc( Annee annee,Classe classe,Ecole ecole,int statut, Pageable pageable) ;
 }
+/*
+Pageable pageable = PageRequest.of(0, 10);
+Page<Employee> page = employeeRepository.findAll(pageable);*/

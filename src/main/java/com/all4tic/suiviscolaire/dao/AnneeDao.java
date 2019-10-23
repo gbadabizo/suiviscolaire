@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface AnneeDao extends CrudRepository<Annee,Integer> {
 	List<Annee> findByStatus(int status);
+	Annee findByLibelleAndStatus(String annee, int status);
 	
 }

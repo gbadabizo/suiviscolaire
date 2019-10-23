@@ -1,14 +1,21 @@
 package com.all4tic.suiviscolaire.restcontrollers;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,10 +32,13 @@ import com.all4tic.suiviscolaire.dao.AnneeDao;
 import com.all4tic.suiviscolaire.dao.EleveClasseAnneeDao;
 import com.all4tic.suiviscolaire.dao.EleveDao;
 import com.all4tic.suiviscolaire.dao.ParentDao;
+import com.all4tic.suiviscolaire.dao.SouscriptionDao;
+import com.all4tic.suiviscolaire.dao.SouscriptionMatiereDao;
 import com.all4tic.suiviscolaire.dto.AnneeDto;
 import com.all4tic.suiviscolaire.dto.ClasseDto;
 import com.all4tic.suiviscolaire.dto.EcoleDto;
 import com.all4tic.suiviscolaire.dto.EleveDto;
+import com.all4tic.suiviscolaire.dto.MatSouscription;
 import com.all4tic.suiviscolaire.dto.MatiereDto;
 import com.all4tic.suiviscolaire.entities.Activation;
 import com.all4tic.suiviscolaire.entities.Annee;
@@ -39,6 +49,8 @@ import com.all4tic.suiviscolaire.entities.Eleve;
 import com.all4tic.suiviscolaire.entities.EleveClasseAnnee;
 import com.all4tic.suiviscolaire.entities.Matiere;
 import com.all4tic.suiviscolaire.entities.Parent;
+import com.all4tic.suiviscolaire.entities.Souscription;
+import com.all4tic.suiviscolaire.entities.SouscriptionMatiere;
 import com.all4tic.suiviscolaire.security.User;
 import com.all4tic.suiviscolaire.security.UserPrincipalDetailsService;
 import com.all4tic.suiviscolaire.security.UserRepository;
@@ -76,6 +88,11 @@ public class AuthenticationRestService {
 	private ClasseService classeService;
 	@Autowired
 	private ParentDao parentDao;
+	@Autowired
+	private SouscriptionDao souscriptionDao;
+	@Autowired
+	private SouscriptionMatiereDao souscriptionMatiereDao;
+	
 	
 	 @GetMapping("/login")
 	    public User login(Principal user) {
@@ -257,12 +274,78 @@ public class AuthenticationRestService {
 	    		datas.add(cldto);
 	    		datas.add(mats);
 	    		datas.add(anneeDto);
+	    		datas.add(p.getId_parent());
 	    		reponse.setCode(Utility.SUCCESSFUL_CODE);
 				reponse.setMessage("SUCCES");
 				reponse.setDatas(datas);
 	    	 }
 	    	 return reponse;
 	    }
-	   /* @PostMapping("/souscription")
-	    public Reponse souscrire(@RequestBody )*/
+	   @PostMapping("/souscription")
+	   @Transactional
+	    public Reponse souscrire(@RequestBody MatSouscription  mats ) {
+		   Reponse reponse =this.getReponse(Utility.FAILLURE_CODE, "ECHEC", null);
+		   if(mats!=null) {
+			   List<Matiere> matieres = mats.getMatieres();
+			   System.out.println("--------martieres-----"+matieres);
+			   
+			   Souscription souscription = new Souscription();
+			   souscription.setEleve(eleveDao.findById((long) mats.getId_eleve()).get());
+			   souscription.setClasse(classeService.getClasseById(mats.getId_classe()));
+			   souscription.setAnnee(anneeDao.findById(mats.getId_annee()).get());
+			   souscription.setParent(parentDao.findById((long)mats.getId_parent()).get());
+			   Souscription oldsouscription = souscriptionDao.findByEleveAndParentAndStatut(eleveDao.findById((long) mats.getId_eleve()).get(), 
+					
+					   parentDao.findById((long)mats.getId_parent()).get(),1);
+			   if(oldsouscription!=null) {
+				   oldsouscription.setStatut(0);
+				   souscriptionDao.save(oldsouscription);
+			   }
+			   
+			   Souscription savedSouscription=null;
+			   try {
+				   Souscription ss = souscriptionDao.findByEleveAndClasseAndAnneeAndParentAndStatut(eleveDao.findById((long) mats.getId_eleve()).get(), 
+						   classeService.getClasseById(mats.getId_classe()),
+						   anneeDao.findById(mats.getId_annee()).get(),
+						   parentDao.findById((long)mats.getId_parent()).get(),1);
+				   
+				   if(ss!=null) {
+					   savedSouscription = ss;
+				   }else {
+					savedSouscription = souscriptionDao.save(souscription);
+				   }
+					   	
+			   System.out.println("-------------"+savedSouscription);
+			   if(savedSouscription!=null) {
+					   if(matieres!=null) {
+						   for(Matiere m : matieres) {
+							   if(m.getStatus()==1) {
+							   SouscriptionMatiere sm = new SouscriptionMatiere();
+							   sm.setMatiere(m);
+							   LocalDate datedeb= LocalDate.now();
+							   sm.setDatedebut(this.convertToDateViaInstant(datedeb));
+						    	LocalDate datefin= datedeb.plusDays(30);
+							  sm.setDatefin(this.convertToDateViaInstant(datefin)) ;
+							  sm.setSouscription(savedSouscription);
+							  System.out.println(sm);
+							 souscriptionMatiereDao.save(sm);
+						   }
+						   }
+					   }
+					   reponse.setCode(Utility.SUCCESSFUL_CODE);
+						reponse.setMessage("SUCCES");
+						reponse.setDatas(savedSouscription.getDateSouscription());
+			   }
+				} catch (NullPointerException e) {
+					  return reponse;
+				}
+				  
+		   }
+		   return reponse;
+	   }
+	   private Date convertToDateViaInstant(LocalDate dateToConvert) {
+		    return java.util.Date.from(dateToConvert.atStartOfDay()
+		      .atZone(ZoneId.systemDefault())
+		      .toInstant());
+		}
 }
